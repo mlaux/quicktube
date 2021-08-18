@@ -10,10 +10,11 @@
 	<!-- todo: use object tag for IE -->
 	<!-- file:///OS%209.0.4%201%20GB/ -->
 	<!-- use cache=true maybe -->
+    <!-- need to add 16 to height for player controls -->
 	<embed src="{{ url_for('static', filename=video_id) }}?{{ nocache_id }}"
 		type="video/quicktime"
-		width="320"
-		height="240"
+		width="256"
+		height="160"
 		scale="aspect"
 		autoplay="true"
         cache="false"

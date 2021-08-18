@@ -1,12 +1,13 @@
-from flask import Flask, render_template, abort
+import binascii
 import os
 import subprocess
-import binascii
 
+from flask import Flask, render_template, abort
 
 # cinepak also works and looks a little better, slightly bigger file size
 # also slooooow to compress
 VIDEO_CODEC = "svq1"
+
 # pcm_s16be, pcm_u8, pcm_mulaw, adpcm_ms also work
 AUDIO_CODEC = "adpcm_ms"
 
@@ -48,7 +49,9 @@ def get_video(id):
     )
 
     # supposedly it exists now, reencode
-    # ffmpeg -i dolce.mp4 -c:v svq1 -c:a adpcm_ms -ar 11025 -vf "scale=-1:144, framerate=15" -movflags faststart dolce-svq1.mov
+    # TODO stream this through ffmpeg to stdout so we don't have to wait for the whole thing to convert
+    # i'm pretty sure that's incompatible with "faststart" because the "moov atom" needs to be at the beginning
+    # ffmpeg -i input.mp4 -c:v svq1 -c:a adpcm_ms -ar 11025 -vf "scale=-1:144, framerate=15" -movflags faststart output.mov
     converted_filename = id + ".mov"
     subprocess.run(
         [
