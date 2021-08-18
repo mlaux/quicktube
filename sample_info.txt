@@ -1,0 +1,21 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'Sample Movie':
+  Metadata:
+    creation_time   : 1999-05-17T16:57:00.000000Z
+    copyright       : © 1999 Apple Computer, Inc.
+    copyright-eng   : © 1999 Apple Computer, Inc.
+    title           : QuickTime 4 Sample Movie
+    title-eng       : QuickTime 4 Sample Movie
+  Duration: 00:00:03.00, start: 0.000000, bitrate: 195 kb/s
+    Stream #0:0(eng): Video: svq1 (SVQ1 / 0x31515653), yuv410p, 200x240, 182 kb/s, 15 fps, 15 tbr, 600 tbn, 600 tbc (default)
+    Metadata:
+      rotate          : 0
+      creation_time   : 1999-05-17T16:57:00.000000Z
+      handler_name    : Apple Video Media Handler
+      encoder         : Sorenson Video
+    Side data:
+      displaymatrix: rotation of -0.00 degrees
+    Stream #0:1(eng): Audio: qdm2 (QDM2 / 0x324D4451), 44100 Hz, mono, s16, 12 kb/s (default)
+    Metadata:
+      rotate          : 0
+      creation_time   : 1999-05-17T16:57:00.000000Z
+      handler_name    : Apple Sound Media Handler

@@ -1,4 +1,5 @@
 venv
 __pycache__
 *.swp
-
+static/*.mov
+static/*.mp4
