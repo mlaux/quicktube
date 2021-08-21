@@ -2,7 +2,8 @@ import binascii
 import os
 import subprocess
 
-from flask import Flask, render_template, abort, request
+from flask import Flask, render_template, abort, request, redirect, url_for
+from youtube_search import YoutubeSearch
 
 # cinepak also works and looks a little better, slightly bigger file size
 # also slooooow to compress
@@ -15,8 +16,23 @@ app = Flask(__name__)
 
 # youtube-dl --get-filename -o "%(id)s.%(ext)s" -f worst https://www.youtube.com/watch\?v\=7fn2eJdyVqg
 
+@app.route("/")
+def home():
+    return render_template('home.html')
+
+@app.route("/search")
+def search():
+    query = request.args.get('q', '')
+    if not query:
+        return redirect(url_for('home'))
+
+    results = YoutubeSearch(query, max_results=10).to_dict()
+    print(results[0])
+
+    return render_template('search.html', results=results, query=query)
+
 @app.route("/video/<id>")
-def get_video(id):
+def video(id):
     filename_result = subprocess.run(
         [
             "youtube-dl",
@@ -36,7 +52,7 @@ def get_video(id):
     
     print(f"Result: {filename}")
 
-    if request.args['nodl']:
+    if request.args.get('nodl', ''):
         return render_template('video.html', video_id='', nocache_id='')
 
     # actually download it

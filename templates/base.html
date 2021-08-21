@@ -5,9 +5,9 @@
 	<META NAME="generator" CONTENT="BBEdit 5.0">
 </HEAD>
 <BODY>
-	<H1>QuickTube</H1>
+	<H1><A HREF="/">QuickTube</A></H1>
     <FORM ACTION="/search" METHOD="GET">
-        <INPUT TYPE="TEXT" NAME="q">
+        <INPUT TYPE="TEXT" NAME="q" VALUE="{{ query }}">
         <INPUT TYPE="SUBMIT" VALUE="Go">
     </FORM>
 	{% block content %}{% endblock %}

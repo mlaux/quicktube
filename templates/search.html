@@ -1,4 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
+<TABLE CELLPADDING="4">
+{% for result in results %}
+    <TR>
+        <TD>
+            <IMG ALIGN="TOP" SRC="{{ result.thumbnails[0] }}" WIDTH="180" HEIGHT="101">
+        </TD>
+        <TD VALIGN="TOP">
+            <H2>
+                <A HREF="{{ url_for('video', id=result.id, nodl='true') }}">
+                    {{ result.title }}
+                </A>
+            </H2>
+        </TD>
+    </TR>
+{% endfor %}
+</TABLE>
 {% endblock %}
 
