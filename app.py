@@ -2,8 +2,9 @@ import binascii
 import os
 import subprocess
 
-from flask import Flask, render_template, abort, request, redirect, url_for
+from flask import Flask, render_template, abort, request, redirect, url_for, Response
 from youtube_search import YoutubeSearch
+from urllib.request import Request, urlopen
 
 # cinepak also works and looks a little better, slightly bigger file size
 # also slooooow to compress
@@ -30,6 +31,22 @@ def search():
     print(results[0])
 
     return render_template('search.html', results=results, query=query)
+
+@app.route("/thumbnail")
+def thumbnail():
+    url = request.args.get('url', '')
+    if not url:
+        abort(404)
+
+    # TODO very insecure, this will proxy any url, fix this!
+    req = Request(url)
+    try:
+        contents = urlopen(req).read()
+        resp = Response(contents)
+        resp.headers['Content-Type'] = 'image/jpeg'
+        return resp
+    except:
+        abort(404)
 
 @app.route("/video/<id>")
 def video(id):
