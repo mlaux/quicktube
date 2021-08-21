@@ -2,7 +2,7 @@ import binascii
 import os
 import subprocess
 
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, request
 
 # cinepak also works and looks a little better, slightly bigger file size
 # also slooooow to compress
@@ -35,6 +35,9 @@ def get_video(id):
     filename = filename_result.stdout.strip()
     
     print(f"Result: {filename}")
+
+    if request.args['nodl']:
+        return render_template('video.html', video_id='', nocache_id='')
 
     # actually download it
     subprocess.run(
